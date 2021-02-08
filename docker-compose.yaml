@@ -1,0 +1,28 @@
+version: '3'
+services:
+
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "Alaska2017"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - /database-data:/var/opt/mssql/data
+        # persist data even if container shuts down
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - /redis-data:/data
+
+
+volumes:
+  database-data: # named volumes can be managed easier using docker-compose
+  redis-data:
+
